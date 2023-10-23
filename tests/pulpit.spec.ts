@@ -52,7 +52,7 @@ test.describe("Pulpit tests", () => {
     );
   });
 
-  test("successful mobile top-up", async ({ page }) => {
+  test.only("successful mobile top-up", async ({ page }) => {
     // Arrange
     const topUpReceiver = pulpitData.topUpReceiver;
     const topUpAmount = pulpitData.topUpAmount;
@@ -64,7 +64,7 @@ test.describe("Pulpit tests", () => {
     await pulpitPage.topUpAmountInput.fill(topUpAmount);
     await pulpitPage.topUpCheckbox.click();
     await pulpitPage.topUpAcceptButton.click();
-    await page.getByTestId("close-button").click();
+    await pulpitPage.closeButton.click();
 
     // before POM
     // await page.locator("#widget_1_topup_receiver").selectOption(topUpReceiver);
@@ -74,20 +74,20 @@ test.describe("Pulpit tests", () => {
     // await page.getByTestId("close-button").click();
 
     // Assert
-    await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
+    await expect(pulpitPage.messageField).toHaveText(expectedMessage);
   });
 
-  test("correct balance after successful mobile top-up", async ({
+  test.only("correct balance after successful mobile top-up", async ({
     page,
   }) => {
     // Arrange
+    const pulpitPage = new PulpitPage(page);
     const topUpReceiver = pulpitData.topUpReceiver;
     const topUpAmount = pulpitData.topUpAmount;
-    const initialBalance = await page.locator("#money_value").innerText();
+    const initialBalance = await pulpitPage.moneyValue.innerText();
     const expectedBalance = Number(initialBalance) - Number(topUpAmount);
 
     // Act
-    const pulpitPage = new PulpitPage(page);
     await pulpitPage.topUpDropdown.selectOption(topUpReceiver);
     await pulpitPage.topUpAmountInput.fill(topUpAmount);
     await pulpitPage.topUpCheckbox.click();
@@ -95,6 +95,6 @@ test.describe("Pulpit tests", () => {
     await page.getByTestId("close-button").click();
 
     // Assert
-    await expect(page.locator("#money_value")).toHaveText(`${expectedBalance}`);
+    await expect(pulpitPage.moneyValue).toHaveText(`${expectedBalance}`);
   });
 });

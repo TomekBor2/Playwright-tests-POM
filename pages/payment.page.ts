@@ -7,9 +7,9 @@ export class PaymentPage {
   accountInput = this.page.getByTestId("form_account_to");
   amountInput = this.page.getByTestId("form_amount");
 
-  expectedMessage = this.page.locator("#show_messages");
+
   acceptButton = this.page.getByRole("button", { name: "wykonaj przelew" });
   closeButton = this.page.getByTestId("close-button");
 
-  messageField = this.page.locator("#show_messages");
+  expectedMessage = this.page.locator("#show_messages");
 }

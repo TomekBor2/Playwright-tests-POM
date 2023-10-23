@@ -35,6 +35,7 @@ test.describe("Payment tests", () => {
     await paymentPage.receiverInput.fill(transferReceiver);
     await paymentPage.accountInput.fill(transferAccount);
     await paymentPage.amountInput.fill(transferAmount);
+
     await paymentPage.acceptButton.click();
     await paymentPage.closeButton.click();
 
@@ -46,6 +47,6 @@ test.describe("Payment tests", () => {
     // await page.getByTestId("close-button").click();
 
     //Assert
-    await expect(paymentPage.messageField).toHaveText(expectedMessage);
+    await expect(paymentPage.expectedMessage).toHaveText(expectedMessage);
   });
 });
