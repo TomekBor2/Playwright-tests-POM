@@ -3,6 +3,8 @@ import { Page } from "@playwright/test";
 export class PulpitPage {
   constructor(private page: Page) {}
 
+  usernameField = this.page.getByTestId("user-name")
+
   //   quick payment
   receiverDropdown = this.page.locator("#widget_1_transfer_receiver");
   amountInput = this.page.locator("#widget_1_transfer_amount");
