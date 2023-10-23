@@ -77,7 +77,7 @@ test.describe("Pulpit tests", () => {
     await expect(page.locator("#show_messages")).toHaveText(expectedMessage);
   });
 
-  test.only("correct balance after successful mobile top-up", async ({
+  test("correct balance after successful mobile top-up", async ({
     page,
   }) => {
     // Arrange
@@ -87,10 +87,11 @@ test.describe("Pulpit tests", () => {
     const expectedBalance = Number(initialBalance) - Number(topUpAmount);
 
     // Act
-    await page.locator("#widget_1_topup_receiver").selectOption(topUpReceiver);
-    await page.locator("#widget_1_topup_amount").fill(topUpAmount);
-    await page.locator("#uniform-widget_1_topup_agreement span").click();
-    await page.getByRole("button", { name: "doładuj telefon" }).click();
+    const pulpitPage = new PulpitPage(page);
+    await pulpitPage.topUpDropdown.selectOption(topUpReceiver);
+    await pulpitPage.topUpAmountInput.fill(topUpAmount);
+    await pulpitPage.topUpCheckbox.click();
+    await pulpitPage.topUpAcceptButton.click();
     await page.getByTestId("close-button").click();
 
     // Assert
