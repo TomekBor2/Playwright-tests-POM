@@ -3,6 +3,7 @@ import { loginData } from "../test-data/login.data";
 import { LoginPage } from "../pages/login.page";
 import { PaymentPage } from "../pages/payment.page";
 import { paymentData } from "../test-data/payment.data";
+import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Payment tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -15,7 +16,9 @@ test.describe("Payment tests", () => {
     await loginPage.passwordInput.fill(userPassword);
     await loginPage.loginButton.click();
 
-    await page.getByRole("link", { name: "płatności" }).click();
+    const pulpitPage = new PulpitPage(page);
+    await pulpitPage.paymentButton.click();
+    // await page.getByRole("link", { name: "płatności" }).click();
   });
 
   test("simple payment", async ({ page }) => {
