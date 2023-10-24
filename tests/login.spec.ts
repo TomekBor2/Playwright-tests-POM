@@ -20,11 +20,6 @@ test.describe("User login to Demobank", () => {
     await loginPage.passwordInput.fill(userPassword);
     await loginPage.loginButton.click();
 
-    //before POM
-    // await page.getByTestId("login-input").fill(userId);
-    // await page.getByTestId("password-input").fill(userPassword);
-    // await page.getByTestId("login-button").click();
-
     // Assert
     const pulpitPage = new PulpitPage(page);
     await expect(pulpitPage.usernameField).toHaveText(expectedUserName);
@@ -39,10 +34,6 @@ test.describe("User login to Demobank", () => {
     const loginPage = new LoginPage(page);
     await loginPage.loginInput.fill(incorrectUserId);
     await loginPage.passwordInput.click();
-
-    // begore POM
-    // await page.getByTestId("login-input").fill(incorrectUserId);
-    // await page.getByTestId("password-input").click();
 
     // Assert
     await expect(loginPage.loginError).toHaveText(expectedErrorMessage);
@@ -59,11 +50,6 @@ test.describe("User login to Demobank", () => {
     await loginPage.loginInput.fill(userId);
     await loginPage.passwordInput.fill(incorrectPassword);
     await loginPage.passwordInput.blur();
-
-    // before POM
-    // await page.getByTestId("login-input").fill(userId);
-    // await page.getByTestId("password-input").fill(incorrectPassword);
-    // await page.getByTestId("password-input").blur();
 
     // Assert
     await expect(loginPage.passwordError).toHaveText(expectedErrorMessage);

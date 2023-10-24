@@ -15,11 +15,6 @@ test.describe("Payment tests", () => {
     await loginPage.passwordInput.fill(userPassword);
     await loginPage.loginButton.click();
 
-    //before POM
-    // await page.getByTestId("login-input").fill(userId);
-    // await page.getByTestId("password-input").fill(userPassword);
-    // await page.getByTestId("login-button").click();
-
     await page.getByRole("link", { name: "płatności" }).click();
   });
 
@@ -38,13 +33,6 @@ test.describe("Payment tests", () => {
 
     await paymentPage.acceptButton.click();
     await paymentPage.closeButton.click();
-
-    // before POM
-    // await page.getByTestId("transfer_receiver").fill(transferReceiver);
-    // await page.getByTestId("form_account_to").fill(transferAccount);
-    // await page.getByTestId("form_amount").fill(transferAmount);
-    // await page.getByRole("button", { name: "wykonaj przelew" }).click();
-    // await page.getByTestId("close-button").click();
 
     //Assert
     await expect(paymentPage.expectedMessage).toHaveText(expectedMessage);
