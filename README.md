@@ -1,4 +1,4 @@
-# Test Automation training from jaktestowac.pl
+# Project based on training from jaktestowac.pl
 
 This is a Test Automation project based on `Playwright` and `TypeScript`. The tested page is a simple demo of a bank.
 
