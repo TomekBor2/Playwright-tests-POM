@@ -6,6 +6,7 @@ import { paymentData } from "../test-data/payment.data";
 import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Payment tests", () => {
+  let paymentPage: PaymentPage
   test.beforeEach(async ({ page }) => {
     const userId = loginData.userId;
     const userPassword = loginData.userPassword;
@@ -18,7 +19,8 @@ test.describe("Payment tests", () => {
 
     const pulpitPage = new PulpitPage(page);
     await pulpitPage.sideMenu.paymentButton.click();
-    // await page.getByRole("link", { name: "płatności" }).click();
+
+    paymentPage = new PaymentPage(page);
   });
 
   test("simple payment", async ({ page }) => {
@@ -29,7 +31,7 @@ test.describe("Payment tests", () => {
     const expectedMessage = `Przelew wykonany! ${transferAmount},00PLN dla ${transferReceiver}`;
 
     //Act
-    const paymentPage = new PaymentPage(page);
+
     await paymentPage.receiverInput.fill(transferReceiver);
     await paymentPage.accountInput.fill(transferAccount);
     await paymentPage.amountInput.fill(transferAmount);
