@@ -5,7 +5,7 @@ import { PulpitPage } from "../pages/pulpit.page";
 import { pulpitData } from "../test-data/pulpit.data";
 
 test.describe("Pulpit tests", () => {
-  let pulpitPage: PulpitPage
+  let pulpitPage: PulpitPage;
   test.beforeEach(async ({ page }) => {
     const userId = loginData.userId;
     const userPassword = loginData.userPassword;
@@ -13,10 +13,7 @@ test.describe("Pulpit tests", () => {
     await page.goto("/");
 
     const loginPage = new LoginPage(page);
-    await loginPage.loginInput.fill(userId);
-    await loginPage.passwordInput.fill(userPassword);
-    await loginPage.loginButton.click();
-
+    await loginPage.login(userId, userPassword);
     pulpitPage = new PulpitPage(page);
   });
 
