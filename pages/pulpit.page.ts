@@ -27,4 +27,21 @@ export class PulpitPage {
   });
   //   topUpCloseButton = this.page.getByTestId("close-button").click();
   moneyValue = this.page.locator("#money_value");
+
+  async makeQuickPayment(receiverId: string, transferAmount: string, transferTitle: string): Promise <void> {
+    await this.receiverDropdown.selectOption(receiverId);
+    await this.amountInput.fill(transferAmount);
+    await this.titleInput.fill(transferTitle);
+
+    await this.acceptButton.click();
+    await this.closeButton.click();
+  }
+
+  async makeTopUp(topUpReceiver: string, topUpAmount: string): Promise <void> {
+    await this.topUpDropdown.selectOption(topUpReceiver);
+    await this.topUpAmountInput.fill(topUpAmount);
+    await this.topUpCheckbox.click();
+    await this.topUpAcceptButton.click();
+    await this.closeButton.click();
+  }
 }
